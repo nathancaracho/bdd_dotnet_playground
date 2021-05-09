@@ -1,0 +1,15 @@
+version: "4.0"
+services: 
+    data_base:
+        image: mcr.microsoft.com/mssql/server
+        environment: 
+            ACCEPT_EULA: "Y"
+            SA_PASSWORD: "P@55w0rd"
+        ports: 
+            - 1433:1433
+    integrated_test:
+        image: mcr.microsoft.com/dotnet/sdk
+        working_dir: /app
+        volumes: 
+            . /app
+        command: bash -c "dotnet test"
